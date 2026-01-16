@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Giocatore {
+public class Giocatore{
 
     // Il nome del giocatore
     private String nome;
