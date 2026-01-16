@@ -19,7 +19,7 @@ public class Giocatore {
     private ArrayList<Integer> domandeAssegnate;
 
     // Costruttore: crea un nuovo giocatore con nome e pedina
-    public Giocatore(String nome, char pedina) {
+    public Giocatore(String nome, char pedina){
         this.nome = nome;
         this.pedina = pedina;
         this.punteggio = 0;               // inizialmente 0 punti
@@ -28,53 +28,53 @@ public class Giocatore {
     }
 
     // Aumenta il punteggio del giocatore
-    public void riceviPunti(int punti) {
+    public void riceviPunti(int punti){
         this.punteggio = this.punteggio + punti;
     }
 
     // Dimezza il punteggio (per eventi negativi)
-    public void dimezzaPunteggio() {
+    public void dimezzaPunteggio(){
         this.punteggio = this.punteggio / 2;
     }
 
     // Salva l'ID di una domanda già fatta
     // Prende una domanda (oggetto Domanda) e salva il suo ID
-    public void aggiungiDomandaAssegnata(Domanda domanda) {
+    public void aggiungiDomandaAssegnata(Domanda domanda){
         domandeAssegnate.add(domanda.getId());
     }
 
     // Controlla se una domanda è già stata fatta
-    public boolean domandaGiaFatta(Domanda domanda) {
+    public boolean domandaGiaFatta(Domanda domanda){
         return domandeAssegnate.contains(domanda.getId());
     }
 
     // Getter: restituisce il nome del giocatore
-    public String getNome() {
+    public String getNome(){
         return nome;
     }
 
     // Getter: restituisce il punteggio
-    public int getPunteggio() {
+    public int getPunteggio(){
         return punteggio;
     }
 
     // Getter: restituisce la pedina del giocatore
-    public char getPedina() {
+    public char getPedina(){
         return pedina;
     }
 
     // Getter: restituisce la casella corrente
-    public Casella getCasellaCorrente() {
+    public Casella getCasellaCorrente(){
         return casellaCorrente;
     }
 
     // Setter: aggiorna la casella corrente
-    public void setCasellaCorrente(Casella casellaCorrente) {
+    public void setCasellaCorrente(Casella casellaCorrente){
         this.casellaCorrente = casellaCorrente;
     }
 
     // Getter: restituisce la lista degli ID delle domande già fatte
-    public ArrayList<Integer> getDomandeAssegnate() {
+    public ArrayList<Integer> getDomandeAssegnate(){
         return domandeAssegnate;
     }
 }
