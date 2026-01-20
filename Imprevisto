@@ -1,0 +1,12 @@
+public class Imprevisto {
+
+    private String descrizione;
+
+    public Imprevisto(String descrizione) {
+        this.descrizione = descrizione;
+    }
+
+    public void esegui(Giocatore g) {
+        System.out.println(descrizione);
+    }
+}
