@@ -1,12 +1,15 @@
-public class Imprevisto {
+public abstract class Imprevisto {
 
-    private String descrizione;
+    protected String descrizione;
 
     public Imprevisto(String descrizione) {
         this.descrizione = descrizione;
     }
 
-    public void esegui(Giocatore g) {
-        System.out.println(descrizione);
+    public String getDescrizione() {
+        return descrizione;
     }
+
+    // Ogni imprevisto applica un effetto diverso
+    public abstract void applicaEffetto(Giocatore g, Tabellone t);
 }

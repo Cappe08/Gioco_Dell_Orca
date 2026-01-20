@@ -1,80 +1,62 @@
 import java.util.ArrayList;
 
-public class Giocatore{
+public class Giocatore {
 
-    // Il nome del giocatore
     private String nome;
-
-    // I punti totali del giocatore
     private int punteggio;
-
-    // La pedina/simbolo del giocatore sul tabellone
     private char pedina;
-
-    // La casella in cui si trova il giocatore
     private Casella casellaCorrente;
 
-    // Lista degli ID delle domande già fatte dal giocatore
-    // Serve per evitare di ripetere la stessa domanda
+    // Lista degli ID delle domande già fatte (per evitare ripetizioni)
     private ArrayList<Integer> domandeAssegnate;
 
-    // Costruttore: crea un nuovo giocatore con nome e pedina
-    public Giocatore(String nome, char pedina){
+    public Giocatore(String nome, char pedina) {
         this.nome = nome;
         this.pedina = pedina;
-        this.punteggio = 0;               // inizialmente 0 punti
-        this.casellaCorrente = null;      // non è ancora posizionato sul tabellone
-        this.domandeAssegnate = new ArrayList<>(); // lista vuota di domande fatte
+        this.punteggio = 0;
+        this.domandeAssegnate = new ArrayList<>();
     }
 
-    // Aumenta il punteggio del giocatore
-    public void riceviPunti(int punti){
-        this.punteggio = this.punteggio + punti;
-    }
-
-    // Dimezza il punteggio (per eventi negativi)
-    public void dimezzaPunteggio(){
-        this.punteggio = this.punteggio / 2;
-    }
-
-    // Salva l'ID di una domanda già fatta
-    // Prende una domanda (oggetto Domanda) e salva il suo ID
-    public void aggiungiDomandaAssegnata(Domanda domanda){
-        domandeAssegnate.add(domanda.getId());
-    }
-
-    // Controlla se una domanda è già stata fatta
-    public boolean domandaGiaFatta(Domanda domanda){
-        return domandeAssegnate.contains(domanda.getId());
-    }
-
-    // Getter: restituisce il nome del giocatore
-    public String getNome(){
+    // ===== Getter =====
+    public String getNome() {
         return nome;
     }
 
-    // Getter: restituisce il punteggio
-    public int getPunteggio(){
+    public int getPunteggio() {
         return punteggio;
     }
 
-    // Getter: restituisce la pedina del giocatore
-    public char getPedina(){
+    public char getPedina() {
         return pedina;
     }
 
-    // Getter: restituisce la casella corrente
-    public Casella getCasellaCorrente(){
+    public Casella getCasellaCorrente() {
         return casellaCorrente;
     }
 
-    // Setter: aggiorna la casella corrente
-    public void setCasellaCorrente(Casella casellaCorrente){
+    public void setCasellaCorrente(Casella casellaCorrente) {
         this.casellaCorrente = casellaCorrente;
     }
 
-    // Getter: restituisce la lista degli ID delle domande già fatte
-    public ArrayList<Integer> getDomandeAssegnate(){
-        return domandeAssegnate;
+    // ===== Logica di gioco =====
+
+    // Aumenta il punteggio
+    public void riceviPunti(int punti) {
+        punteggio += punti;
+    }
+
+    // Dimezza il punteggio (divisione intera)
+    public void dimezzaPunteggio() {
+        punteggio = punteggio / 2;
+    }
+
+    // Segna una domanda come già fatta
+    public void aggiungiDomandaAssegnata(Domanda d) {
+        domandeAssegnate.add(d.getId());
+    }
+
+    // Controlla se una domanda è già stata fatta
+    public boolean domandaGiaFatta(Domanda d) {
+        return domandeAssegnate.contains(d.getId());
     }
 }
