@@ -4,12 +4,12 @@ public class Casella {
     private String titolo;
     private Casella precedente;
     private Casella successiva;
-    private Domanda domanda;
+    private Domanda1 domanda;
     private Giocatore[] giocatoriPresenti;
     private int numGiocatori;
 
     // Costruttore
-    public Casella(int id, String titolo, Domanda domanda, int maxGiocatori) {
+    public Casella(int id, String titolo, Domanda1 domanda, int maxGiocatori) {
         this.id = id;
         this.titolo = titolo;
         this.domanda = domanda;

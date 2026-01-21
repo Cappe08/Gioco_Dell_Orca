@@ -12,10 +12,10 @@ public class Tabellone {
 
     public void costruisciTabellone(Domandiere domandiere) {
 
-        Domanda[] domande = domandiere.getDomande();
+        Domanda1[] domande = domandiere.getDomande();
 
         for (int i = 0; i < numeroCaselle; i++) {
-            Domanda d = domandiere.scegliDomanda(domande);
+            Domanda1 d = domandiere.scegliDomanda(domande);
 
             listaCaselle[i] = new Casella(
                 i,

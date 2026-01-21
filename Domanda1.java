@@ -1,4 +1,4 @@
-public class Domanda {
+public class Domanda1 {
     private String domanda;
     private String[] risposte;
     private int rispostaCorretta;
@@ -6,7 +6,7 @@ public class Domanda {
     private int livelloDifficolta;
     private int id;
 
-    public Domanda(String domanda, String[] risposte, int rispostaCorretta, int punti, int livelloDifficolta, int id) {
+    public Domanda1(String domanda, String[] risposte, int rispostaCorretta, int punti, int livelloDifficolta, int id) {
         this.risposte = risposte;
         this.domanda = domanda;
         this.rispostaCorretta = rispostaCorretta;
@@ -72,6 +72,7 @@ public class Domanda {
         return s;
     }
 
+    // valuta la risposta data
     public boolean corretta(int rispostaScelta){
         return rispostaScelta == rispostaCorretta;
     }

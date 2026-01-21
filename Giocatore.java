@@ -51,12 +51,12 @@ public class Giocatore {
     }
 
     // Segna una domanda come già fatta
-    public void aggiungiDomandaAssegnata(Domanda d) {
+    public void aggiungiDomandaAssegnata(Domanda1 d) {
         domandeAssegnate.add(d.getId());
     }
 
     // Controlla se una domanda è già stata fatta
-    public boolean domandaGiaFatta(Domanda d) {
+    public boolean domandaGiaFatta(Domanda1 d) {
         return domandeAssegnate.contains(d.getId());
     }
 }
