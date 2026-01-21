@@ -31,11 +31,11 @@ public class Domanda {
         this.punti = punti;
     }
 
-    public int getLivloDifficolta() {
+    public int getLivelloDifficolta() {
         return livelloDifficolta;
     }
 
-    public void setLivloDifficolta(int livelloDifficolta) {
+    public void setLivelloDifficolta(int livelloDifficolta) {
         this.livelloDifficolta = livelloDifficolta;
     }
 
