@@ -1,8 +1,8 @@
 public class Domandiere {
-    private Domanda1[] domande;
+    private Domanda[] domande;
     private String percorsoFileDomande;
 
-    public Domandiere(Domanda1[] domande, String percorsoFileDomande){
+    public Domandiere(Domanda[] domande, String percorsoFileDomande){
         this.domande = domande;
         this.percorsoFileDomande = percorsoFileDomande;
     }
@@ -15,16 +15,16 @@ public class Domandiere {
         this.percorsoFileDomande = percorsoFileDomande;
     }
 
-    public Domanda1[] getDomande(){
+    public Domanda[] getDomande(){
         return domande;
     }
 
-    public void setDomande(Domanda1[] domande){
+    public void setDomande(Domanda[] domande){
         this.domande = domande;
     }
 
     //metodo per scegliere una domanda casuale dall'array di domande
-    public Domanda1 scegliDomanda(Domanda1[] domande){
+    public Domanda scegliDomanda(Domanda[] domande){
         if(domande.length == 0 || domande == null){
             return null;
         }
@@ -54,3 +54,4 @@ public class Domandiere {
     }
 
 }
+
