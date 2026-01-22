@@ -1,4 +1,4 @@
-public class Domanda1 {
+public class Domanda{
     private String domanda;
     private String[] risposte;
     private int rispostaCorretta;
@@ -6,7 +6,7 @@ public class Domanda1 {
     private int livelloDifficolta;
     private int id;
 
-    public Domanda1(String domanda, String[] risposte, int rispostaCorretta, int punti, int livelloDifficolta, int id) {
+    public Domanda(String domanda, String[] risposte, int rispostaCorretta, int punti, int livelloDifficolta, int id) {
         this.risposte = risposte;
         this.domanda = domanda;
         this.rispostaCorretta = rispostaCorretta;
@@ -71,9 +71,9 @@ public class Domanda1 {
         }
         return s;
     }
+    public boolean valutaRisposta(String risposta) {
+    String rispostaGiusta = risposte[rispostaCorretta - 1];
+    return risposta.equalsIgnoreCase(rispostaGiusta);
+}
 
-    // valuta la risposta data
-    public boolean corretta(int rispostaScelta){
-        return rispostaScelta == rispostaCorretta;
-    }
 }
