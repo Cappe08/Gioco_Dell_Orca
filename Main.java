@@ -2,8 +2,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("    GIOCO DELL'OCA  ");
-        Domanda[] tutteDomande = new Domanda[90];
-
+          Domanda[] tutteDomande = new Domanda[90];
     tutteDomande[0] = new Domanda("Qual è la capitale della Francia?", 
         new String[]{"Parigi", "Londra", "Berlino", "Madrid"}, 1, 10, 1, 1);
 
@@ -287,33 +286,44 @@ public class Main {
 
     tutteDomande[89] = new Domanda("Quanto fa 7 per 8?", 
         new String[]{"48", "54", "56", "64"}, 3, 10, 1, 90);
+        Domandiere domandiere = new Domandiere(tutteDomande);
 
-
-
-
-
-
+        // -------------------------
         // creazione del tabellone
-        System.out.println("dimmi caselle quanto vuoi nel tabellone:");
-        int numCaselle = Leggi.unInt();
+        // -------------------------
+        int numCaselle=0;
+        do{
+            System.out.println("dimmi caselle quanto vuoi nel tabellone:");
+            numCaselle = Leggi.unInt();
+        }while(numCaselle <= 0);
+        System.out.println("Numero caselle valido. Il tabellone ora ha "+numCaselle+ " caselle.");
+
+
         Casella[] caselle = new Casella[numCaselle];
         for (int i = 0; i < numCaselle; i++) {
-            caselle[i] = new Casella(i, "Casella " + (i + 1), tutteDomande[i % numCaselle], 5);
-            if (i > 0) caselle[i].setPrecedente(caselle[i - 1]);
-            if (i < numCaselle - 1) caselle[i].setSuccessiva(caselle[i + 1]);
+            // uso modulo sulla lunghezza delle domande per evitare OOB
+            caselle[i] = new Casella(i, "Casella " + (i + 1),
+                tutteDomande[i % tutteDomande.length], 5);
+            if (i > 0) {
+                caselle[i].setPrecedente(caselle[i - 1]);
+            }
+            if (i < numCaselle - 1) {
+                caselle[i].setSuccessiva(caselle[i + 1]);
+            }
         }
 
-
-
+        // -------------------------
         // inserimento giocatori (max 5)
+        // -------------------------
         int numGiocatori;
         do {
             System.out.print("Inserisci il numero di giocatori (max 5): ");
             numGiocatori = Leggi.unInt();
         } while (numGiocatori < 1 || numGiocatori > 5);
+
         Giocatore[] giocatori = new Giocatore[numGiocatori];
 
-        int punteggio_iniziale=10;
+        int punteggio_iniziale=50;
         for (int i = 0; i < numGiocatori; i++) {
             System.out.print("Nome giocatore " + (i + 1) + ": ");
             String nome = Leggi.unoString();
@@ -321,96 +331,148 @@ public class Main {
             char pedina = Leggi.unChar();
             giocatori[i] = new Giocatore(nome, pedina);
             giocatori[i].riceviPunti(punteggio_iniziale);
+            // tutti partono dalla casella 0
             caselle[0].aggiungiGiocatore(giocatori[i]);
         }
 
+        // -------------------------
         // creazione del dado
-
+        // -------------------------
         Dado dado = new Dado(6);
 
-
-
-
-
-
+        // -------------------------
+        // ciclo di gioco principale
+        // -------------------------
         boolean giocoFinito = false;
+
         while (!giocoFinito) {
-    for (int i = 0; i < numGiocatori; i++) {
-        Giocatore g = giocatori[i];
 
-        if (g.getPunteggio() > 0) {
+            for (int i = 0; i < numGiocatori; i++) {
 
-            System.out.println("\nTurno di " + g.getNome() + " (Punti: " + g.getPunteggio() + ")");
-            System.out.print("Premi invio per lanciare il dado...");
-            Leggi.unoString();
+                Giocatore g = giocatori[i];
 
-            int lancio = dado.lancia(dado.getNumeroFacce());
-            System.out.println("Hai tirato: " + lancio);
-
-            Casella attuale = g.getCasellaCorrente();
-            int indiceNuovo = attuale.getId() + lancio;
-
-            if (indiceNuovo >= numCaselle) {
-                indiceNuovo = numCaselle - 1 - (indiceNuovo - (numCaselle - 1));
-                System.out.println("Hai superato la casella finale! Torni indietro a " + (indiceNuovo + 1));
-            }
-
-            Casella destinazione = caselle[indiceNuovo];
-
-            attuale.rimuoviGiocatore(g);
-            destinazione.aggiungiGiocatore(g);
-
-            destinazione.attivaDomanda(g);
-
-            if (g.getPunteggio() <= 0) {
-                System.out.println(g.getNome() + " ha perso tutti i punti e viene eliminato!");
-                destinazione.rimuoviGiocatore(g);
-            } else {
-                if (destinazione.getNumGiocatori() > 1) {
-                    System.out.println("Inizio lotta sulla casella!");
-                    Giocatore avversario = destinazione.getAltroGiocatore(g);
-                    int puntiVinti = lottaDadi(g, avversario, dado);
-                    g.riceviPunti(puntiVinti);
-                    avversario.dimezzaPunteggio();
-                    System.out.println(g.getNome() + " vince la lotta e prende punti dall'avversario!");
+                // se eliminato salta
+                if (g.getPunteggio() <= 0) {
+                    System.out.println(g.getNome() + " ha punteggio 0 o negativo e salta il turno.");
+                    continue;
                 }
 
-                if (destinazione.getId() == numCaselle - 1) {
-                    if (g.getPunteggio() > 0) {
-                        System.out.println("\n " + g.getNome() + " HA VINTO!");
-                        giocoFinito = true;
+                System.out.println("\nTurno di " + g.getNome() + " (Punti: " + g.getPunteggio() + ")");
+                System.out.print("Premi invio per lanciare i dadi...");
+                Leggi.unoString();
+
+                // lancio due dadi
+                int lancio = dado.lancia2();
+                System.out.println("Hai tirato: " + lancio);
+
+                // posizione e calcolo nuova casella con rimbalzo + bonus
+                Casella attuale = g.getCasellaCorrente();
+                int posizioneAttuale = attuale.getId();
+                int ultima = numCaselle - 1;
+                int indiceNuovo = posizioneAttuale + lancio;
+
+                if (indiceNuovo > ultima) {
+                    double casuale = Math.random(); // 0..1
+                    if (casuale < g.getBonus()) {
+                        // successo: arriva alla finale
+                        indiceNuovo = ultima;
+                        System.out.println("Colpo di fortuna! Vai direttamente alla casella finale.");
+                    } else {
+                        // rimbalzo
+                        int eccesso = indiceNuovo - ultima;
+                        indiceNuovo = ultima - eccesso;
+                        if (indiceNuovo < 0) {
+                            indiceNuovo = 0;
+                        }
+                        System.out.println("Hai superato la fine! Rimbalzi alla casella " + (indiceNuovo + 1));
+                        g.addBonus(); // +20%
+                        System.out.println("Bonus aumentato al " + (int)(g.getBonus() * 100) + "%");
                     }
                 }
-            }
 
-        } else {
-            System.out.println(g.getNome() + " ha punteggio 0 o negativo e salta il turno.");
-        }
-    }
-}
+                // spostamento effettivo
+                Casella destinazione = caselle[indiceNuovo];
+                attuale.rimuoviGiocatore(g);
+                destinazione.aggiungiGiocatore(g);
 
+                // prendo domanda casuale per il giocatore dal domandiere
+                Domanda d = domandiere.scegli(g);
 
-        // ===========================
-        // RISULTATI FINALI
-        // ===========================
+                if (d != null) {
+                    System.out.println("\n" + destinazione.getTitolo());
+                    System.out.println(d);
+                    System.out.print("Inserisci la risposta: ");
+                    String risposta = Leggi.unoString();
+
+                    if (d.valutaRisposta(risposta)) {
+                        System.out.println("Risposta corretta! +" + d.getPunti());
+                        g.riceviPunti(d.getPunti());
+                    } else {
+                        System.out.println("Risposta sbagliata! Punti diminuiti.");
+                        g.diminuisciPunteggio();
+                    }
+                } else {
+                    System.out.println("Nessuna domanda disponibile in questo momento.");
+                }
+
+                // eliminazione se punteggio <= 0
+                if(g.getPunteggio()<=0) {
+                    System.out.println(g.getNome() + " è eliminato!");
+                    destinazione.rimuoviGiocatore(g);
+                    continue;
+                }
+
+                // lotta se ci sono più giocatori
+                if (destinazione.getNumGiocatori() > 1) {
+                    System.out.println("Inizio lotta!");
+                    Giocatore avv = destinazione.getAltroGiocatore(g);
+                    if (avv != null) {
+                        int puntiVinti = lottaDadi(g, avv, dado);
+                        if (puntiVinti > 0) {
+                            g.riceviPunti(puntiVinti);
+                            System.out.println(g.getNome() + " vince la lotta e guadagna " + puntiVinti + " punti!");
+                        } else {
+                            System.out.println("La lotta non ha assegnato punti al vincitore.");
+                        }
+                    }
+                }
+
+                // controllo vittoria (casella finale e punteggio positivo)
+                if (destinazione.getId() == ultima && g.getPunteggio() > 0) {
+                    System.out.println("\n" + g.getNome() + " HA VINTO!");
+                    giocoFinito = true;
+                    break;
+                }
+            } // end for giocatori
+        } // end while giocoFinito
+
+        // -------------------------
+        // risultato finale
+        // -------------------------
         System.out.println("\n=== PUNTEGGI FINALI ===");
-        for (Giocatore g : giocatori) {
-            System.out.println(g.getNome() + ": " + g.getPunteggio());
+        for (Giocatore gg : giocatori) {
+            System.out.println(gg.getNome() + ": " + gg.getPunteggio());
         }
-    }
+    } // end main
 
-    // ===========================
+    // -------------------------
     // LOTTA TRA DUE GIOCATORI
-    // ===========================
+    // -------------------------
     public static int lottaDadi(Giocatore g1, Giocatore g2, Dado dado) {
         int puntiVinti = 0;
         for (int i = 0; i < 3; i++) {
             int l1 = dado.lancia(dado.getNumeroFacce());
             int l2 = dado.lancia(dado.getNumeroFacce());
-            if (l1 > l2) puntiVinti += 1;
-            else if (l2 > l1) puntiVinti -= 1;
+            if (l1 > l2) {
+                puntiVinti = puntiVinti + 1;
+            } else if (l2 > l1) {
+                puntiVinti = puntiVinti - 1;
+            }
         }
-        return puntiVinti > 0 ? g2.getPunteggio() / 2 : 0;
+        if (puntiVinti > 0) {
+            return g2.getPunteggio() / 2;
+        } else {
+            return 0;
+        }
     }
 }
-
