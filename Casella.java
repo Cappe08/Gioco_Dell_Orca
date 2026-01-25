@@ -107,15 +107,16 @@ public class Casella {
         System.out.println(domanda);
 
         System.out.print("Inserisci la risposta: ");
-        String risposta = Leggi.unoString();
+        String risposta=Leggi.unoString();
 
-        if(domanda.valutaRisposta(risposta)) {
+        if(domanda.valutaRisposta(risposta)){
             System.out.println("Risposta corretta! +"+domanda.getPunti());
             g.riceviPunti(domanda.getPunti());
         }else{
-            System.out.println("Risposta sbagliata! Punti dimezzati.");
-            g.dimezzaPunteggio();
+            System.out.println("Risposta sbagliata! I punti saranno diminuiti.");
+            g.diminuisciPunteggio();
         }
     }
 }
+
 
