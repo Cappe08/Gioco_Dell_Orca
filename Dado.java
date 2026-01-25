@@ -18,5 +18,14 @@ public class Dado{
         Random r=new Random();
         return r.nextInt(numeroFacce)+1;
     }
+    public int lanciaDueDadi(){
+        Random r = new Random();
+        return (r.nextInt(6)+1)+(r.nextInt(6)+1);
+    }
+    public int lancia2(){
+        // lancia due dadi
+        return lancia(this.numeroFacce)+lancia(this.numeroFacce);
 }
+}
+
 
