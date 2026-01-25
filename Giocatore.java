@@ -6,6 +6,7 @@ public class Giocatore {
     private int punteggio;
     private char pedina;
     private Casella casellaCorrente;
+    private double bonus;
 
     // Lista degli ID delle domande già fatte (per evitare ripetizioni)
     private ArrayList<Integer> domandeAssegnate;
@@ -33,6 +34,9 @@ public class Giocatore {
     public Casella getCasellaCorrente() {
         return casellaCorrente;
     }
+    public double getBonus() {
+        return bonus;
+    }
 
     public void setCasellaCorrente(Casella casellaCorrente) {
         this.casellaCorrente = casellaCorrente;
@@ -45,9 +49,9 @@ public class Giocatore {
         punteggio += punti;
     }
 
-    // Dimezza il punteggio (divisione intera)
-    public void dimezzaPunteggio() {
-        punteggio = punteggio / 2;
+    // diminuisci il punteggio
+    public void diminuisciPunteggio() {
+        punteggio = punteggio-10;
     }
 
     // Segna una domanda come già fatta
@@ -59,5 +63,13 @@ public class Giocatore {
     public boolean domandaGiaFatta(Domanda d) {
         return domandeAssegnate.contains(d.getId());
     }
+    public void addBonus() {
+        bonus = bonus + 0.20;
+        if (bonus > 1.0) {
+            bonus = 1.0;
+        }
+    }
+    public void resetBonus() {
+        bonus = 0.0;
+    }
 }
-
