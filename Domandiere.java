@@ -5,7 +5,7 @@ public class Domandiere{
         this.domande=domande;
     }
 
-    public Domanda scegli(Giocatore g){
+    public Domanda scegliDomanda(Domanda[] domande){
         if(domande==null || domande.length==0){
             return null;
         }
@@ -14,4 +14,3 @@ public class Domandiere{
         return domande[indice];
     }
 }
-
