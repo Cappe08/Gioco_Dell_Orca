@@ -8,7 +8,7 @@ public class Domandiere{
     }
 
     public Domanda scegliDomanda(){
-        if(domande==null || domande.length==0){
+        if(numDomande == 0){
             return null;
         }
 
@@ -16,10 +16,10 @@ public class Domandiere{
         return domande[indice];
     }
 
-    public boolean aggiungiDomanda(Domanda singolDomanda) {
+    public boolean aggiungiDomanda(Domanda singolaDomanda) {
         boolean res = false;
         if(numDomande < domande.length) {
-            domande[numDomande] = singolDomanda;
+            domande[numDomande] = singolaDomanda;
             numDomande++;
             res = true;
         }

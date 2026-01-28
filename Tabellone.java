@@ -4,8 +4,10 @@ public class Tabellone{
 
     public Tabellone(int numeroCaselle, Domandiere domandiere){
         this.numeroCaselle=numeroCaselle;
-        this.listaCaselle=new Casella[numeroCaselle];
-        costruisciTabellone(domandiere);
+        if(numeroCaselle < 100){ // utilizzo il numero magico (100) perche se ho più caselle che domande ci saranno delle caselle senza domande e il programma non funziona :)
+            this.listaCaselle=new Casella[numeroCaselle];
+            costruisciTabellone(domandiere);
+        }
     }
 
     public void costruisciTabellone(Domandiere domandiere){
@@ -28,8 +30,18 @@ public class Tabellone{
     
     public void spostaPedina(Giocatore g,int passi){
         Casella attuale=g.getCasellaCorrente();
+
+        if(attuale == null){
+            attuale = listaCaselle[0]; // prima casella del tabellone
+            attuale.aggiungiGiocatore(g); // aggiunge il giocatore nella prima casella del tabellone
+        }
+
         Casella destinazione=spostaCasella(attuale,passi);
-        attuale.rimuoviGiocatore(g);
+
+        if(attuale != null){
+            attuale.rimuoviGiocatore(g);
+        }
+
         destinazione.aggiungiGiocatore(g);
         destinazione.attivaDomanda(g);
     }
