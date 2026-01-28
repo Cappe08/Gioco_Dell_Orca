@@ -1,11 +1,13 @@
 public class Domandiere{
     private Domanda[] domande;
+    private int numDomande;
 
-    public Domandiere(Domanda[] domande) {
-        this.domande=domande;
+    public Domandiere(int numeroDomande) {
+        domande = new Domanda[numeroDomande];
+        numDomande = 0;
     }
 
-    public Domanda scegliDomanda(Domanda[] domande){
+    public Domanda scegliDomanda(){
         if(domande==null || domande.length==0){
             return null;
         }
@@ -13,4 +15,15 @@ public class Domandiere{
         int indice=(int)(Math.random()*domande.length);
         return domande[indice];
     }
+
+    public boolean aggiungiDomanda(Domanda singolDomanda) {
+        boolean res = false;
+        if(numDomande < domande.length) {
+            domande[numDomande] = singolDomanda;
+            numDomande++;
+            res = true;
+        }
+        return res;
+    }
+
 }

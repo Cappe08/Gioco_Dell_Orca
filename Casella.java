@@ -44,14 +44,7 @@ public class Casella {
 
     // Numero di giocatori presenti
     public int getNumGiocatori(){
-    int count=0;
-
-    for(int i=0;i<giocatoriPresenti.length;i++) {
-        if(giocatoriPresenti[i]!=null) {
-            count=count+1;
-        }
-    }
-    return count;
+        return numGiocatori;
     }
 
     // Aggiunge un giocatore
@@ -73,6 +66,7 @@ public class Casella {
                     giocatoriPresenti[j]=giocatoriPresenti[j+1];
                 }
                 giocatoriPresenti[numGiocatori-1]=null;
+                numGiocatori--;
                 break;
             }
         }
@@ -103,11 +97,11 @@ public class Casella {
             return;
         }
 
-        System.out.println("\n Casella "+(id+1));
-        System.out.println(domanda);
+        System.out.println("\n Casella "+ id);
+        System.out.println(domanda.getTitolo());
 
         System.out.print("Inserisci la risposta: ");
-        String risposta=Leggi.unoString();
+        int risposta=Leggi.unInt();
 
         if(domanda.valutaRisposta(risposta)){
             System.out.println("Risposta corretta! +"+domanda.getPunti());

@@ -1,10 +1,18 @@
 public class Domanda {
-    private int id;
     private String titolo;
     private String[] risposte;
     private int corretta;
     private int punti;
     private String livelloDifficolta;
+    private int id;
+
+    public int getId(){
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getCorretta(){
         return corretta;
@@ -12,14 +20,6 @@ public class Domanda {
 
     public void setCorretta(int corretta){
         this.corretta = corretta;
-    }
-
-    public int getId(){
-        return id;
-    }
-
-    public void setId(int id){
-        this.id = id;
     }
 
     public String getTitolo(){
@@ -64,8 +64,8 @@ public class Domanda {
     }
 
     // Metodo per valutare la risposta dell'utente
-    public boolean valutaRisposta(int id){
-        if(id == corretta)
+    public boolean valutaRisposta(int rispostaScelta){
+        if(rispostaScelta == corretta)
             return true;
         else{
             return false;

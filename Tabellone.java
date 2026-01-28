@@ -10,13 +10,8 @@ public class Tabellone{
 
     public void costruisciTabellone(Domandiere domandiere){
         for(int i=0;i<numeroCaselle;i=i+1){
-            Domanda d=domandiere.scegli(null);
-            listaCaselle[i] = new Casella(
-            i,
-            "Casella " + i,
-            d,
-            5
-            );
+            Domanda d = domandiere.scegliDomanda();
+            listaCaselle[i] = new Casella(i, "Casella " + i, d, 5);
         }
         /*Collegamento bidirezionale delle caselle:
         ogni casella viene collegata a quella precedente e a quella successiva,
