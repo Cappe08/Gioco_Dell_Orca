@@ -100,16 +100,23 @@ public class Casella {
         System.out.println("\n Casella "+ id);
         System.out.println(domanda.getTitolo());
 
+        String[] risposte = domanda.getRisposte();
+        for (int i = 0; i < risposte.length; i++) {
+            System.out.println((i + 1) + ") " + risposte[i]);
+        }
+        
         System.out.print("Inserisci la risposta: ");
         int risposta=Leggi.unInt();
 
         if(domanda.valutaRisposta(risposta)){
-            System.out.println("Risposta corretta! +"+domanda.getPunti());
+            System.out.println("Risposta corretta! +" + domanda.getPunti() + " punti");
             g.riceviPunti(domanda.getPunti());
         }else{
             System.out.println("Risposta sbagliata! I punti saranno diminuiti.");
+             System.out.println("La risposta corretta era: " + domanda.getCorretta());
             g.diminuisciPunteggio();
         }
+        
     }
 }
 

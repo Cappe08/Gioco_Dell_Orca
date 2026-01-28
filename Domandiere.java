@@ -13,7 +13,11 @@ public class Domandiere{
         }
 
         int indice=(int)(Math.random()*domande.length);
-        return domande[indice];
+        Domanda scelta = domande[indice];
+        domande[indice] = domande[numDomande - 1];
+        domande[numDomande - 1] = null;
+        numDomande--;
+        return scelta;
     }
 
     public boolean aggiungiDomanda(Domanda singolaDomanda) {
