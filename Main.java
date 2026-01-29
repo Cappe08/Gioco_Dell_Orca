@@ -29,6 +29,12 @@ public class Main {
         new ImprevistoPerdiPunti(14)
         };
 
+        // assegna gli imprevisti alle caselle specifiche
+        tabellone.getCasella(1).setImprevisto(imprevisti[0]);
+        tabellone.getCasella(9).setImprevisto(imprevisti[1]);
+        tabellone.getCasella(13).setImprevisto(imprevisti[2]);
+        tabellone.getCasella(17).setImprevisto(imprevisti[3]);
+
         //creazione del dado e della lotta
         Dado dado = new Dado(6);
         Lotta lotta = new Lotta(dado);
@@ -44,7 +50,7 @@ public class Main {
             String comando = Leggi.unoString();
 
             int passi = 0;
-            if(comando.equals("")){
+            if(comando.equals("invio")){
                 passi = dado.lancia(6);
                 System.out.println(g.getNome() + " ha ottenuto: " + passi);
                 tabellone.spostaPedina(g, passi);

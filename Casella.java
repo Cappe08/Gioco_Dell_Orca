@@ -8,6 +8,7 @@ public class Casella {
     private Giocatore[] giocatoriPresenti;
     private int numGiocatori;
     private boolean domandaGiaUsata = false;
+    private Imprevisto imprevisto;
 
     // Costruttore
     public Casella(int id, String titolo, Domanda domanda, int maxGiocatori) {
@@ -19,6 +20,15 @@ public class Casella {
     }
 
     // Getter e setter
+
+    public void setImprevisto(Imprevisto i){
+        this.imprevisto = i;
+    }
+
+    public Imprevisto getImprevisto() {
+        return this.imprevisto;
+    }
+
     public int getId(){
         return id;
     }
