@@ -7,6 +7,7 @@ public class Casella {
     private Domanda domanda;
     private Giocatore[] giocatoriPresenti;
     private int numGiocatori;
+    private boolean domandaGiaUsata = false;
 
     // Costruttore
     public Casella(int id, String titolo, Domanda domanda, int maxGiocatori) {
@@ -117,6 +118,8 @@ public class Casella {
             g.diminuisciPunteggio();
         }
         
+        domandaGiaUsata = true;
+        domanda = null;
     }
 }
 

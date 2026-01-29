@@ -40,11 +40,48 @@ public class Main {
             Giocatore g = giocatori[turno];
             System.out.println("\nTocca a " + g.getNome() + " (punteggio: " + g.getPunteggio() + ")");
             System.out.println("Premi INVIO per lanciare il dado");
-            Leggi.unoString();
+            System.out.println("Oppure scrivi: imprevisto1, imprevisto2, imprevisto3, imprevisto4, lotta");
+            String comando = Leggi.unoString();
 
-            int passi = dado.lancia(6);
-            System.out.println(g.getNome() + " ha ottenuto: " + passi);
-            tabellone.spostaPedina(g, passi);
+            int passi = 0;
+            if(comando.equals("")){
+                passi = dado.lancia(6);
+                System.out.println(g.getNome() + " ha ottenuto: " + passi);
+                tabellone.spostaPedina(g, passi);
+            }else if(comando.equals("imprevisto1")){
+                imprevisti[0].applicaEffetto(g, tabellone);
+
+            }else if(comando.equals("imprevisto2")){
+                imprevisti[1].applicaEffetto(g, tabellone);
+
+            }else if(comando.equals("imprevisto3")){
+                imprevisti[2].applicaEffetto(g, tabellone);
+
+            }else if(comando.equals("imprevisto4")){
+                imprevisti[3].applicaEffetto(g, tabellone);
+
+            }else if(comando.equalsIgnoreCase("lotta")){
+                Casella corrente = g.getCasellaCorrente();
+                Giocatore altro = corrente.getAltroGiocatore(g);
+
+                if(altro == null){
+                    System.out.println("Nessun giocatore con cui combattere su questa casella.");
+                }else{
+                    System.out.println("lotta tra " + g.getNome() + " e " + altro.getNome());
+                    Giocatore vincitore = lotta.iniziaLotta(g, altro);
+
+                    if(vincitore != null){
+                        System.out.println("Ha vinto: " + vincitore.getNome());
+                    }else{
+                        System.out.println("La lotta è finita in pareggio.");
+                    }
+                }
+
+            }else{
+                System.out.println("Comando non valido!");
+                continue;
+            }
+
             Casella corrente = g.getCasellaCorrente();
             System.out.println(g.getNome() + " si trova sulla casella " + corrente.getId());
 
