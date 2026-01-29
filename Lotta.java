@@ -8,7 +8,6 @@ public class Lotta {
 
     // Inizia la lotta tra due giocatori
     public Giocatore iniziaLotta(Giocatore giocatore1, Giocatore giocatore2){
-
         int vittorie1 = 0;
         int vittorie2 = 0;
         int numeroLanci = 3;

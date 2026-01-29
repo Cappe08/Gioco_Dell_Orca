@@ -5,8 +5,13 @@ public class Main {
         Domandiere domandiere = PercorsoFile.creaQuiz();
 
         //Creazione tabellone
-        int numeroCaselle = 20;
+        System.out.print("Inserisci il numero di caselle del tabellone(non deve superare 100, in caso contrario verrà inserito di default 100 caselle ");
+        int numeroCaselle = Leggi.unInt();
+        if(numeroCaselle > 100){
+            numeroCaselle = 100;
+        }
         Tabellone tabellone = new Tabellone(numeroCaselle, domandiere);
+        
 
         //creazione giocatori
         System.out.print("Quanti giocatori partecipano al gioco? ");

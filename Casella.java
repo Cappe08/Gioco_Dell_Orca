@@ -124,8 +124,9 @@ public class Casella {
             g.riceviPunti(domanda.getPunti());
         }else{
             System.out.println("Risposta sbagliata! I punti saranno diminuiti.");
-             System.out.println("La risposta corretta era: " + domanda.getCorretta());
-            g.diminuisciPunteggio();
+            System.out.println("La risposta corretta era: " + domanda.getCorretta());
+            int puntiDaTogliere = g.getPunteggio() / 2; 
+            g.riceviPunti(-puntiDaTogliere);
         }
         
         domandaGiaUsata = true;
