@@ -5,10 +5,11 @@ public class Main {
         Domandiere domandiere = PercorsoFile.creaQuiz();
 
         //Creazione tabellone
+        System.out.println("");
         System.out.print("Inserisci il numero di caselle del tabellone(non deve superare 100, in caso contrario verrà inserito di default 100 caselle ");
         int numeroCaselle = Leggi.unInt();
         if(numeroCaselle > 100){
-            numeroCaselle = 100;
+            numeroCaselle = 99;
         }
         Tabellone tabellone = new Tabellone(numeroCaselle, domandiere);
         
